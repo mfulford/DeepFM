@@ -138,8 +138,10 @@ class LayerDeepFM(Layer):
         self.h2_b = self.add_weight(shape=(self.h2,), initializer='zeros', name='h2_b')
 
         self.FM_add_W = self.add_weight(shape=(input_shape[1], 1), initializer='glorot_uniform', name='FM_add_W')
-        self.WX_W = self.add_weight(shape=(self.h2, 1), initializer='glorot_uniform', name='WX_W')
-        self.WX_b = self.add_weight(shape=(1,), initializer='zeros', name='WX_b')
+        
+        if self.return_embedding == False:
+            self.WX_W = self.add_weight(shape=(self.h2, 1), initializer='glorot_uniform', name='WX_W')
+            self.WX_b = self.add_weight(shape=(1,), initializer='zeros', name='WX_b')
 
         super(LayerDeepFM, self).build(input_shape)  # Be sure to call this somewhere!
 
